@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE phrases SYSTEM "entities.dtd">
+<epp:phrases xmlns="http://www.w3.org/1999/xhtml" xmlns:epp="http://eprints.org/ep3/phrase" xmlns:epc="http://eprints.org/ep3/control">
+
+<epp:phrase id="Plugin/Screen/EPMC/LatexCoversheet:error:no_plugin">Error: failed to load the OpenOffice plugin. Is the OpenOffice Toolkit installed?</epp:phrase>
+<epp:phrase id="Plugin/Screen/EPMC/LatexCoversheet:ready">Coversheets are ready to be used on your system. To add templates go to the Admin page, under 'Config Tools'.</epp:phrase>
+
+<epp:phrase id="datasetname_coversheet">Coversheets</epp:phrase>
+<epp:phrase id="datasethelp_coversheet">Edit, activate or disable coversheets for this repository.</epp:phrase>
+
+<epp:phrase id="validate:encrypted_pdf">You have uploaded a PDF file that is encrypted.  Please consider uploading an unencrypted one.</epp:phrase>
+
+<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:sure_deprecate">Are you sure you want to deprecate <epc:pin name="title"/>.  It will no longer be attached to items that are downloaded.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:title">Deprecate</epp:phrase>
+<epp:phrase id="lib/submissionform:action_deprecate">Deprecate</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:item_deprecated">Item Deprecated</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Activate:sure_activate">Are you sure you want to activate <epc:pin name="title"/>.  This will cause it to be attached to downloaded items.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Activate:title">Activate</epp:phrase>
+<epp:phrase id="lib/submissionform:action_activate">Activate</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Activate:item_activated">Item Activated</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Remove:sure_delete">Are you sure you want to remove <epc:pin name="title"/>.  It will be completely destroyed.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Remove:title">Remove</epp:phrase>
+<epp:phrase id="lib/submissionform:action_remove">Remove</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Remove:item_removed">Item Removed</epp:phrase>
+
+<epp:phrase id="document_fieldhelp_coversheet">Select a Coversheet</epp:phrase>
+<epp:phrase id="download_uncovered">Download without Coversheet</epp:phrase>
+
+<epp:phrase id="coversheet_fieldname_backfile">Back Page(s)</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_backfile">A file containing any back page(s) to be attached to a document.</epp:phrase>
+<epp:phrase id="coversheet_fieldname_description">Description</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_description">The coversheet description.</epp:phrase>
+<epp:phrase id="coversheet_fieldname_frontfile">Front Page(s)</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_frontfile">A file containing any front page(s) to be attached to a document.</epp:phrase>
+<epp:phrase id="coversheet_fieldname_name">Name</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_name">The name of this coversheet.</epp:phrase>
+<epp:phrase id="coversheet_fieldname_notes">Notes</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_notes">Any notes for other administrators.</epp:phrase>
+<epp:phrase id="coversheet_fieldname_official_url">Official URL</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_official_url">Official URL</epp:phrase>
+<epp:phrase id="coversheet_fieldname_status">Status</epp:phrase>
+<epp:phrase id="coversheet_fieldopt_status_active">Active</epp:phrase>
+<epp:phrase id="coversheet_fieldopt_status_deprecated">Deprecated</epp:phrase>
+<epp:phrase id="coversheet_fieldopt_status_draft">Draft</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_status">The status of this coversheet.  Users will only be able to add active coversheets to a document.</epp:phrase>
+<epp:phrase id="coversheet_fieldname_version_comments">Version Comments</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_version_comments">Version Comments</epp:phrase>
+<epp:phrase id="coversheet_fieldname_coversheetid">ID</epp:phrase>
+<epp:phrase id="coversheet_fieldname_apply_to">Apply To</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_apply_to">Which item types would you like to apply this coversheet to?</epp:phrase>
+<epp:phrase id="coversheet_fieldname_apply_priority">Priority</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_apply_priority">An integer. If an item matches two coversheets, the one with the higher priority will be attached.</epp:phrase>
+
+<epp:phrase id="coversheet_fieldname_datestamp">Datestamp</epp:phrase>
+<epp:phrase id="coversheet_fieldname_lastmod">Last modified</epp:phrase>
+<epp:phrase id="coversheet_fieldname_userid">User</epp:phrase>
+
+<epp:phrase id="cannot_upload_encrypted_pdf">You may not upload encrypted PDF files.  Please supply an unencrypted version.</epp:phrase>
+<epp:phrase id="document_fieldname_coversheet">Coversheet</epp:phrase>
+<epp:phrase id="Coversheet/Type:none">No File</epp:phrase>
+<epp:phrase id="Coversheet/Type:odt">OpenOffice</epp:phrase>
+<epp:phrase id="Coversheet/Type:pdf">PDF</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/CoversheetManager:description">Manage document coversheets.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/CoversheetManager:help_title">Help</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/CoversheetManager:help">Use the list of things to manage the list of things.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/CoversheetManager:title">Coversheet Manager</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/CoversheetSearch:title">Search by Coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:cancel">Cancel</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:update">Update</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:delete_backfile">Remove Back Page(s)</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:delete_frontfile">Remove Front Page(s)</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:exit">Exit</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:coversheet_saved">Coversheet Saved</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:save">Save</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:title">Edit Coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:file_not_ok">There was a problem uploading the file.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Edit:file_removed">Page Removed</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Activate:title">Activate Coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/New:action:create:title">Create New Coversheet</epp:phrase>
+
+<epp:phrase id='current_file'>Current File: </epp:phrase>
+<epp:phrase id='upload_file'>Upload New File: </epp:phrase>
+
+</epp:phrases>

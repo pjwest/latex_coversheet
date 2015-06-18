@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<!-- 
+	Document citation style (brief)
+-->
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:cite="http://eprints.org/ep3/citation" xmlns:epc="http://eprints.org/ep3/control">
+
+<!-- coversheet citations -->
+
+<span class="ep_coversheet_citation">
+	<epc:choose>
+		<epc:when test="name">
+			<epc:print expr='name'/>
+		</epc:when>
+		<epc:otherwise>
+			UNDEFINED
+		</epc:otherwise>
+	</epc:choose>
+</span>
+</cite:citation>
