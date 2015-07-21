@@ -8,6 +8,35 @@ $c->{plugins}{"Screen::Coversheet::Deprecate"}{params}{disable} = 0;
 $c->{plugins}{"Screen::Coversheet::Edit"}{params}{disable} = 0;
 $c->{plugins}{"Screen::Coversheet::New"}{params}{disable} = 0;
 $c->{plugins}{"Screen::EPMC::Coversheet"}{params}{disable} = 0;
+$c->{plugins}{"Screen::Admin::ReApplyCoversheet"}{params}{disable} = 0;
+
+
+$c->{executables}->{pdflatex} = "/usr/bin/pdflatex";
+$c->{executables}->{pdftk} = "/usr/bin/pdftk";
+
+my $coverpage = {};
+$c->{coverpage} = $coverpage;
+
+# phrase file used to specify coverpage content
+$coverpage->{phrase_file} = $c->{archiveroot}."/cfg/lang/en/phrases/coverpage.xml";
+
+# return coverpage content in the form of a LaTeX document
+$coverpage->{get_content} = sub {
+
+    my ( $session, $eprint, $doc ) = @_;
+print STDERR "coverpage {get_content} called doc_type[".$doc->get_type."] status[".$eprint->get_value( "eprint_status" )."] \n";
+
+#    return unless $doc->get_type eq "application/pdf";
+ #   return unless $eprint->get_value( "eprint_status" ) eq "archive";
+
+    my %bits = (
+        citation => EPrints::Utils::tree_to_utf8( $eprint->render_citation() ),
+        url => $eprint->get_url,
+    );
+
+    return $session->phrase( "coverpage:general", %bits );
+};
+
 
 
 
@@ -37,6 +66,7 @@ $c->{roles}->{"coversheet-editor"} =
         "coversheet/activate",
         "coversheet/deprecate",
         "coversheet/view",
+        "coversheet/reapply",
 ];
 
 push @{$c->{user_roles}->{editor}}, 'coversheet-editor';

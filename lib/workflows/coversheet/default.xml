@@ -20,7 +20,6 @@
     <component type="Field::Multi">
       <title>Documents</title>
       <field ref="frontfile"/>
-     <field ref="backfile"/>
     </component> 
   </stage>
 </workflow>

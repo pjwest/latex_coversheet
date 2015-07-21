@@ -7,7 +7,7 @@ $c->{datasets}->{coversheet} = {
 };
 
 # Define the default columns (fields) shown on the Manage Records Screens
-$c->{datasets}->{coversheet}->{columns} = [ 'coversheetid', 'status', 'name', 'frontfile', 'backfile' ];
+$c->{datasets}->{coversheet}->{columns} = [ 'coversheetid', 'status', 'name', 'frontfile' ];
 
 {
 no warnings;
@@ -19,7 +19,7 @@ use strict;
 
 sub valid_file_extensions
 {
-	return [ 'pdf', 'odt' ];
+	return [ 'pdf', 'ltx' ];
 }
 
 sub get_system_field_info
@@ -53,12 +53,6 @@ sub get_system_field_info
 
 		{
 			name=>"frontfile",
-			type=>"file",
-			render_value=>"EPrints::DataObj::Coversheet::render_coversheet_file",
-			render_input => "EPrints::DataObj::Coversheet::render_coversheet_file_input"
-		},
-		{
-			name=>"backfile",
 			type=>"file",
 			render_value=>"EPrints::DataObj::Coversheet::render_coversheet_file",
 			render_input => "EPrints::DataObj::Coversheet::render_coversheet_file_input"
@@ -204,7 +198,7 @@ sub remove
 	
 	my $rc = 1;
 
-	foreach (qw/ frontfile backfile /) #get rid of the documents
+	foreach (qw/ frontfile /) #get rid of the documents
 	{
 		$self->erase_page($_);
 	}
@@ -309,20 +303,16 @@ sub get_pages
 
 	my $frontfile_path = $self->get_file_path( 'frontfile' );
 	my $frontfile_type = $self->get_page_type( 'frontfile' );
-	my $backfile_path = $self->get_file_path( 'backfile' );
-	my $backfile_type = $self->get_page_type( 'backfile' );
 
-	return undef unless( defined  $frontfile_path || $backfile_path );
+print STDERR "z_coversheet_dataset::get_pages frontfile_path[$frontfile_path] frontfile_type[$frontfile_type]\n";
+	return undef unless( defined  $frontfile_path );
 
+print STDERR "z_coversheet_dataset::get_pages frontfile_path[$frontfile_path] frontfile_type[$frontfile_type]\n";
 	return { 
 		frontfile => {
 			path => $frontfile_path,
 			type => $frontfile_type
 		},
-		backfile => {
-			path => $backfile_path,
-			type => $backfile_type,
-		}
 	};
 
 }
@@ -365,7 +355,7 @@ sub render_coversheet_file
         return $f;
 }
 
-#takes a user and a fieldname (frontfile, backfile) and returns true if this user can approve the new file.
+#takes a user and a fieldname (frontfile) and returns true if this user can approve the new file.
 sub can_approve
 {
 	my ($self, $user, $fieldname) = @_;
@@ -445,7 +435,7 @@ sub get_live_paths
 }
 
 
-#name is metafield name (e.g. frontfile, backfile)
+#name is metafield name (e.g. frontfile)
 sub erase_page
 {
 	my ($self, $fieldname) = @_;

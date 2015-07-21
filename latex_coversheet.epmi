@@ -29,16 +29,16 @@
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>f5536539f17b8d9b274d434332003f9f</hash>
+          <hash>1259000662b9af087dde8d3d06e6fdcb</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1623</filesize>
+          <filesize>2606</filesize>
         </file>
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet_dataset.pl</filename>
           <mime_type>text/x-c++</mime_type>
-          <hash>24e7bd1f06b621131cec5994f23c3256</hash>
+          <hash>1c4b0fa740d1daa1b495f57adb4d09cf</hash>
           <hash_type>MD5</hash_type>
-          <filesize>16143</filesize>
+          <filesize>15924</filesize>
         </file>
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet_tags.pl</filename>
@@ -50,30 +50,30 @@
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet_trigger.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>9c3bdb4597c9586c3b78a23181ef9b4e</hash>
+          <hash>e68ebcfa230bd5eede3f52586cf120af</hash>
           <hash_type>MD5</hash_type>
-          <filesize>2258</filesize>
+          <filesize>4767</filesize>
         </file>
         <file>
           <filename>lang/en/phrases/latex_coversheet.xml</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>d094fe8c84db76338a6449424ec05758</hash>
+          <hash>761f36449b5f31710971eef8942de859</hash>
           <hash_type>MD5</hash_type>
-          <filesize>6764</filesize>
+          <filesize>8206</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Convert/AddCoversheet.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>b6dbdb232c9150d0a203f6776b45ab0b</hash>
+          <hash>c5fc8bd930f64fddc8aeb4fe37d95bdf</hash>
           <hash_type>MD5</hash_type>
-          <filesize>7072</filesize>
+          <filesize>9072</filesize>
         </file>
         <file>
-          <filename>plugins/EPrints/Plugin/Event/AddCoversheet.pm</filename>
+          <filename>plugins/EPrints/Plugin/Screen/Admin/ReApplyCoversheet.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>a7ffa1c09419f776b6bb31a5ceab7c1c</hash>
+          <hash>8c1f3cb9831881428844f5aa1eb715d0</hash>
           <hash_type>MD5</hash_type>
-          <filesize>2299</filesize>
+          <filesize>3638</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/Activate.pm</filename>
@@ -113,9 +113,9 @@
         <file>
           <filename>workflows/coversheet/default.xml</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>c3d76683d3a4bf6e4ce42b4550e2e61f</hash>
+          <hash>47856d016083bbfa057ded6df1decd54</hash>
           <hash_type>MD5</hash_type>
-          <filesize>708</filesize>
+          <filesize>679</filesize>
         </file>
       </files>
       <mime_type>inode/symlink</mime_type>

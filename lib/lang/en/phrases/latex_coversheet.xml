@@ -59,6 +59,7 @@
 <epp:phrase id="document_fieldname_coversheet">Coversheet</epp:phrase>
 <epp:phrase id="Coversheet/Type:none">No File</epp:phrase>
 <epp:phrase id="Coversheet/Type:odt">OpenOffice</epp:phrase>
+<epp:phrase id="Coversheet/Type:ltx">LaTeX</epp:phrase>
 <epp:phrase id="Coversheet/Type:pdf">PDF</epp:phrase>
 <epp:phrase id="Plugin/Screen/Admin/CoversheetManager:description">Manage document coversheets.</epp:phrase>
 <epp:phrase id="Plugin/Screen/Admin/CoversheetManager:help_title">Help</epp:phrase>
@@ -77,6 +78,23 @@
 <epp:phrase id="Plugin/Screen/Coversheet/Edit:file_removed">Page Removed</epp:phrase>
 <epp:phrase id="Plugin/Screen/Coversheet/Activate:title">Activate Coversheet</epp:phrase>
 <epp:phrase id="Plugin/Screen/Coversheet/New:action:create:title">Create New Coversheet</epp:phrase>
+
+
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:title">Apply Coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:description">Apply the appropriate coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:blurb"><p>Enter up to <epc:pin name="limit" /> item ids (separated by a comma) and then click cover to apply the coversheet to those items.</p></epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:input">Item ID(s):</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:action:cover:title">Cover</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:action:cancel:title">Cancel</epp:phrase>
+
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:ignore_ids">The following ids were ignored :<br /> <epc:pin name="id_list" /> </epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:no_ids">Please enter at least one item id</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:no_valid_ids">The item ids entered were not valid</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:too_many_ids">Too many item ids have been requested. Only the first <epc:pin name="limit" /> will be covered.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:covered">The following items were covered:<br /> <epc:pin name="items" /> </epp:phrase>
+
+
+
 
 <epp:phrase id='current_file'>Current File: </epp:phrase>
 <epp:phrase id='upload_file'>Upload New File: </epp:phrase>
