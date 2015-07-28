@@ -16,8 +16,8 @@ sub new
         $self->{icon} = "action_edit.png";
 
         $self->{appears} = [
-                {	# Listing
-                        place => "dataobj_actions",
+                {	# Coversheet::Listing
+                        place => "coversheet_actions",
                         position => 300,
                 },
         ];
@@ -31,7 +31,7 @@ sub can_be_viewed
 {
 	my( $self ) = @_;
 
-        my $ds = $self->{processor}->{dataset}; # set by Screen::Listing
+        my $ds = $self->{processor}->{dataset}; # set by Coversheet::Listing
 
 	if( defined $ds && $ds->base_id eq 'coversheet' )
 	{
@@ -65,7 +65,7 @@ sub action_exit
 {
 	my( $self ) = @_;
 
-	$self->{processor}->{screenid} = 'Listing';	
+	$self->{processor}->{screenid} = 'Coversheet::Listing';	
 }	
 
 sub allow_delete_frontfile
@@ -196,7 +196,7 @@ sub screen_after_flow
 {
 	my( $self ) = @_;
 
-	return "Listing";
+	return "Coversheet::Listing";
 }
 
 sub render

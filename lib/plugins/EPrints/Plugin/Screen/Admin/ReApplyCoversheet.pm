@@ -93,26 +93,31 @@ sub action_cover
 			$self->html_phrase( "too_many_ids", limit=>$xml->create_text_node( $self->{cover_limit} ) ) );
 	}
 
+       	my $plugin = $repo->plugin( "Convert::AddCoversheet" );
+	unless( defined $plugin )
+       	{
+               	$self->{processor}->add_message(
+                        "warning",
+                        $self->html_phrase( "no_plugin" ) ); 
+		return;
+       	}
+
+	my @covered_ids = ();
+	foreach my $id ( @ids ) 
+	{
+		my $item = $ds->dataobj( $id );
+		if ( $item )
+		{
+			my $covered = $repo->call( "cover_eprint_docs" , $repo, $item, $plugin );
+			push @covered_ids, $id if $covered;
+		}
+	}
+
 	$self->{processor}->add_message(
 		"message",
 		$self->html_phrase( "covered", 
-				items => $xml->create_text_node( join(", ", @ids ) ) ) );
+				items => $xml->create_text_node( join(", ", @covered_ids ) ) ) );
 	
-#	my $file = $session->config( "variables_path" )."/views.timestamp";
-#	unless( open( CHANGEDFILE, ">$file" ) )
-#	{
-#		$self->{processor}->add_message( "error",
-#			$self->html_phrase( "failed" ) );
-#		$self->{processor}->{screenid} = "Admin";
-#		return;
-#	}
-#	print CHANGEDFILE "This file last poked at: ".EPrints::Time::human_time()."\n";
-#	close CHANGEDFILE;
-
-#	$self->{processor}->add_message( "message",
-#		$self->html_phrase( "ok" ) );
-#	$self->{processor}->{screenid} = "Admin";
-
 	return;
 }	
 

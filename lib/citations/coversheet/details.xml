@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+
+<!-- 
+	Coversheet citation style (details)
+-->
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:cite="http://eprints.org/ep3/citation" xmlns:epc="http://eprints.org/ep3/control">
+
+<!-- coversheet citations -->
+
+<div class="ep_coversheet_citation" style="margin-bottom: 2em; margin-top: 2em;">
+    <h2><epc:phrase ref="coversheet_fieldname_name"/></h2>
+	<epc:choose>
+		<epc:when test="name">
+			<epc:print expr='name'/>
+		</epc:when>
+		<epc:otherwise>
+			UNSPECIFIED
+		</epc:otherwise>
+	</epc:choose>
+
+  <epc:if test="official_url">
+    <div style="margin-bottom: 1em">
+      <epc:phrase ref="coversheet_fieldname_official_url"/>: <epc:print expr="official_url" />
+    </div>
+  </epc:if>
+
+  <epc:if test="description">
+    <h2><epc:phrase ref="coversheet_fieldname_description"/></h2>
+    <p style="text-align: left; margin: 1em auto 0em auto"><epc:print expr="description" /></p>
+  </epc:if>
+
+  <epc:if test="version_comments">
+    <h2><epc:phrase ref="coversheet_fieldname_version_comments"/></h2>
+    <p style="text-align: left; margin: 1em auto 0em auto"><epc:print expr="version_comments" /></p>
+  </epc:if>
+
+  <epc:if test="notes">
+    <h2><epc:phrase ref="coversheet_fieldname_notes"/></h2>
+    <p style="text-align: left; margin: 1em auto 0em auto"><epc:print expr="notes" /></p>
+  </epc:if>
+
+  <epc:if test="apply_priority">
+    <h2><epc:phrase ref="coversheet_fieldname_apply_priority"/></h2>
+    <p style="text-align: left; margin: 1em auto 0em auto"><epc:print expr="apply_priority" /></p>
+  </epc:if>
+
+  <epc:if test="apply_to">
+    <h2><epc:phrase ref="coversheet_fieldname_apply_to"/></h2>
+    <p style="text-align: left; margin: 1em auto 0em auto"><epc:print expr="apply_to" /></p>
+  </epc:if>
+
+</div>
+</cite:citation>

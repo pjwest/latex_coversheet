@@ -20,6 +20,13 @@
           <filesize>452</filesize>
         </file>
         <file>
+          <filename>citations/coversheet/details.xml</filename>
+          <mime_type>inode/symlink</mime_type>
+          <hash>8602554abe12814cf504bbd09e203b00</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>1768</filesize>
+        </file>
+        <file>
           <filename>epm/latex_coversheet/bin/remove_coversheets</filename>
           <mime_type>text/plain</mime_type>
           <hash>0677fa05ee49952ae3c4b3972aab8df2</hash>
@@ -57,44 +64,65 @@
         <file>
           <filename>lang/en/phrases/latex_coversheet.xml</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>761f36449b5f31710971eef8942de859</hash>
+          <hash>e6aa9b68f6b9d3c4bac8421409f4e188</hash>
           <hash_type>MD5</hash_type>
-          <filesize>8206</filesize>
+          <filesize>10488</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Convert/AddCoversheet.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>c5fc8bd930f64fddc8aeb4fe37d95bdf</hash>
+          <hash>dd35d1ec0d87257ecc809b0c7fae3253</hash>
           <hash_type>MD5</hash_type>
-          <filesize>9072</filesize>
+          <filesize>3953</filesize>
+        </file>
+        <file>
+          <filename>plugins/EPrints/Plugin/Screen/Admin/ManageCoversheets.pm</filename>
+          <mime_type>inode/symlink</mime_type>
+          <hash>4863b8f3ce4f614cc2f608faf89a888d</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>665</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Admin/ReApplyCoversheet.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>8c1f3cb9831881428844f5aa1eb715d0</hash>
+          <hash>00b2667eb5e5afb9f009143f7be3f55d</hash>
           <hash_type>MD5</hash_type>
-          <filesize>3638</filesize>
+          <filesize>3656</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/Activate.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>edd8c0b1b03e0428e98e5ca03eeb6b08</hash>
+          <hash>36cdb984985540222f9c1eaa42e125c3</hash>
           <hash_type>MD5</hash_type>
-          <filesize>2003</filesize>
+          <filesize>2046</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/Deprecate.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>b6da12473837c3eacbfdc83b6e4f0b9b</hash>
+          <hash>d90cdf08cc9bb9a6a4be778d4450834a</hash>
           <hash_type>MD5</hash_type>
-          <filesize>2095</filesize>
+          <filesize>2138</filesize>
+        </file>
+        <file>
+          <filename>plugins/EPrints/Plugin/Screen/Coversheet/Destroy.pm</filename>
+          <mime_type>inode/symlink</mime_type>
+          <hash>4e2375a5d4dd034df1683e03d02fcd3c</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>791</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/Edit.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>5ac7ec1538667b2f3dd2cdfd192cb83e</hash>
+          <hash>1432d249322360b785fd5fbfec3001f2</hash>
           <hash_type>MD5</hash_type>
-          <filesize>5182</filesize>
+          <filesize>5225</filesize>
+        </file>
+        <file>
+          <filename>plugins/EPrints/Plugin/Screen/Coversheet/Listing.pm</filename>
+          <mime_type>inode/symlink</mime_type>
+          <hash>de78799a4aadf1e30700f4a4d59540b8</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>7745</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/New.pm</filename>
@@ -104,11 +132,25 @@
           <filesize>1320</filesize>
         </file>
         <file>
+          <filename>plugins/EPrints/Plugin/Screen/Coversheet/View.pm</filename>
+          <mime_type>inode/symlink</mime_type>
+          <hash>930a04740daf0e769052e57209d8c8fe</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>4107</filesize>
+        </file>
+        <file>
           <filename>plugins/EPrints/Plugin/Screen/EPMC/LatexCoversheet.pm</filename>
           <mime_type>inode/symlink</mime_type>
           <hash>0fa243a94ec7662f257b4a6057d4c7b7</hash>
           <hash_type>MD5</hash_type>
           <filesize>1438</filesize>
+        </file>
+        <file>
+          <filename>plugins/EPrints/Plugin/Screen/EPrint/Staff/ApplyCoversheet.pm</filename>
+          <mime_type>inode/symlink</mime_type>
+          <hash>26325530dd958c43b0896c228a8a3ab4</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>1558</filesize>
         </file>
         <file>
           <filename>workflows/coversheet/default.xml</filename>

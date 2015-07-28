@@ -13,8 +13,8 @@ sub new
 	$self->{icon} = "action_approve.png";
 
 	$self->{appears} = [
-                {       # Listing
-                        place => "dataobj_actions",
+                {       # Coversheet::Listing
+                        place => "coversheet_actions",
                         position => 400,
                 },
 	];
@@ -29,7 +29,7 @@ sub can_be_viewed
 {
 	my( $self ) = @_;
 
-        my $ds = $self->{processor}->{dataset}; # set by Screen::Listing
+        my $ds = $self->{processor}->{dataset}; # set by Coversheet::Listing
 
         if( defined $ds && $ds->base_id eq 'coversheet' )
         {
@@ -86,14 +86,14 @@ sub action_cancel
 {
 	my( $self ) = @_;
 
-	$self->{processor}->{screenid} = "Listing";
+	$self->{processor}->{screenid} = "Coversheet::Listing";
 }
 
 sub action_activate
 {
 	my( $self ) = @_;
 
-	$self->{processor}->{screenid} = "Listing";
+	$self->{processor}->{screenid} = "Coversheet::Listing";
 
 	$self->{processor}->{dataobj}->set_value('status', 'active');
 	$self->{processor}->{dataobj}->commit();

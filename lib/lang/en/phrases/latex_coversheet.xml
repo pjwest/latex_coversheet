@@ -2,26 +2,12 @@
 <!DOCTYPE phrases SYSTEM "entities.dtd">
 <epp:phrases xmlns="http://www.w3.org/1999/xhtml" xmlns:epp="http://eprints.org/ep3/phrase" xmlns:epc="http://eprints.org/ep3/control">
 
-<epp:phrase id="Plugin/Screen/EPMC/LatexCoversheet:error:no_plugin">Error: failed to load the OpenOffice plugin. Is the OpenOffice Toolkit installed?</epp:phrase>
 <epp:phrase id="Plugin/Screen/EPMC/LatexCoversheet:ready">Coversheets are ready to be used on your system. To add templates go to the Admin page, under 'Config Tools'.</epp:phrase>
 
 <epp:phrase id="datasetname_coversheet">Coversheets</epp:phrase>
 <epp:phrase id="datasethelp_coversheet">Edit, activate or disable coversheets for this repository.</epp:phrase>
 
 <epp:phrase id="validate:encrypted_pdf">You have uploaded a PDF file that is encrypted.  Please consider uploading an unencrypted one.</epp:phrase>
-
-<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:sure_deprecate">Are you sure you want to deprecate <epc:pin name="title"/>.  It will no longer be attached to items that are downloaded.</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:title">Deprecate</epp:phrase>
-<epp:phrase id="lib/submissionform:action_deprecate">Deprecate</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:item_deprecated">Item Deprecated</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Activate:sure_activate">Are you sure you want to activate <epc:pin name="title"/>.  This will cause it to be attached to downloaded items.</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Activate:title">Activate</epp:phrase>
-<epp:phrase id="lib/submissionform:action_activate">Activate</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Activate:item_activated">Item Activated</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Remove:sure_delete">Are you sure you want to remove <epc:pin name="title"/>.  It will be completely destroyed.</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Remove:title">Remove</epp:phrase>
-<epp:phrase id="lib/submissionform:action_remove">Remove</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Remove:item_removed">Item Removed</epp:phrase>
 
 <epp:phrase id="document_fieldhelp_coversheet">Select a Coversheet</epp:phrase>
 <epp:phrase id="download_uncovered">Download without Coversheet</epp:phrase>
@@ -30,8 +16,8 @@
 <epp:phrase id="coversheet_fieldhelp_backfile">A file containing any back page(s) to be attached to a document.</epp:phrase>
 <epp:phrase id="coversheet_fieldname_description">Description</epp:phrase>
 <epp:phrase id="coversheet_fieldhelp_description">The coversheet description.</epp:phrase>
-<epp:phrase id="coversheet_fieldname_frontfile">Front Page(s)</epp:phrase>
-<epp:phrase id="coversheet_fieldhelp_frontfile">A file containing any front page(s) to be attached to a document.</epp:phrase>
+<epp:phrase id="coversheet_fieldname_frontfile">Front Page</epp:phrase>
+<epp:phrase id="coversheet_fieldhelp_frontfile">A file containing a front page to be attached to a document.</epp:phrase>
 <epp:phrase id="coversheet_fieldname_name">Name</epp:phrase>
 <epp:phrase id="coversheet_fieldhelp_name">The name of this coversheet.</epp:phrase>
 <epp:phrase id="coversheet_fieldname_notes">Notes</epp:phrase>
@@ -66,6 +52,26 @@
 <epp:phrase id="Plugin/Screen/Admin/CoversheetManager:help">Use the list of things to manage the list of things.</epp:phrase>
 <epp:phrase id="Plugin/Screen/Admin/CoversheetManager:title">Coversheet Manager</epp:phrase>
 <epp:phrase id="Plugin/Screen/Admin/CoversheetSearch:title">Search by Coversheet</epp:phrase>
+
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:title">Apply Coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:description">Apply the appropriate coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:blurb"><p>Enter up to <epc:pin name="limit" /> item ids (separated by a comma) and then click cover to apply the coversheet to those items.</p></epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:input">Item ID(s):</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:action:cover:title">Cover</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:action:cancel:title">Cancel</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:ignore_ids">The following ids were ignored :<br /> <epc:pin name="id_list" /> </epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:no_ids">Please enter at least one item id</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:no_valid_ids">The item ids entered were not valid</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:too_many_ids">Too many item ids have been requested. Only the first <epc:pin name="limit" /> will be covered.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:no_plugin">Could not load Convert::AddCoversheet plugin</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:covered">The following items were covered:<br /> <epc:pin name="items" /> </epp:phrase>
+
+<epp:phrase id="Plugin/Screen/Admin/ManageCoversheets:title">Manage Coversheets</epp:phrase>
+<epp:phrase id="Plugin/Screen/Admin/ManageCoversheets:description">Edit, activate or disable coversheets for this repository.</epp:phrase>
+
+<epp:phrase id='current_file'>Current File: </epp:phrase>
+<epp:phrase id='upload_file'>Upload New File: </epp:phrase>
+
 <epp:phrase id="Plugin/Screen/Coversheet/Edit:cancel">Cancel</epp:phrase>
 <epp:phrase id="Plugin/Screen/Coversheet/Edit:update">Update</epp:phrase>
 <epp:phrase id="Plugin/Screen/Coversheet/Edit:delete_backfile">Remove Back Page(s)</epp:phrase>
@@ -76,27 +82,50 @@
 <epp:phrase id="Plugin/Screen/Coversheet/Edit:title">Edit Coversheet</epp:phrase>
 <epp:phrase id="Plugin/Screen/Coversheet/Edit:file_not_ok">There was a problem uploading the file.</epp:phrase>
 <epp:phrase id="Plugin/Screen/Coversheet/Edit:file_removed">Page Removed</epp:phrase>
-<epp:phrase id="Plugin/Screen/Coversheet/Activate:title">Activate Coversheet</epp:phrase>
+
 <epp:phrase id="Plugin/Screen/Coversheet/New:action:create:title">Create New Coversheet</epp:phrase>
 
 
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:title">Apply Coversheet</epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:description">Apply the appropriate coversheet</epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:blurb"><p>Enter up to <epc:pin name="limit" /> item ids (separated by a comma) and then click cover to apply the coversheet to those items.</p></epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:input">Item ID(s):</epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:action:cover:title">Cover</epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:action:cancel:title">Cancel</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:title">Deprecate</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:sure_deprecate">Are you sure you want to deprecate <epc:pin name="title"/>.  It will no longer be attached to items that are downloaded.</epp:phrase>
+<epp:phrase id="lib/submissionform:action_deprecate">Deprecate</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Deprecate:item_deprecated">Item Deprecated</epp:phrase>
 
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:ignore_ids">The following ids were ignored :<br /> <epc:pin name="id_list" /> </epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:no_ids">Please enter at least one item id</epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:no_valid_ids">The item ids entered were not valid</epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:too_many_ids">Too many item ids have been requested. Only the first <epc:pin name="limit" /> will be covered.</epp:phrase>
-<epp:phrase id="Plugin/Screen/Admin/ReApplyCoversheet:covered">The following items were covered:<br /> <epc:pin name="items" /> </epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Activate:title">Activate Coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Activate:sure_activate">Are you sure you want to activate <epc:pin name="title"/>.  This will cause it to be attached to downloaded items.</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Activate:title">Activate</epp:phrase>
+<epp:phrase id="lib/submissionform:action_activate">Activate</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Activate:item_activated">Item Activated</epp:phrase>
+
+<epp:phrase id="Plugin/Screen/Coversheet/Remove:title">Remove</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Remove:sure_delete">Are you sure you want to remove <epc:pin name="title"/>.  It will be completely destroyed.</epp:phrase>
+<epp:phrase id="lib/submissionform:action_remove">Remove</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Remove:item_removed">Item Removed</epp:phrase>
 
 
+<epp:phrase id="Plugin/Screen/Coversheet/View:title">View</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/View:page_title"><epc:pin name="listing" /> - <epc:pin name="desc" /></epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/View:page_detail"><div><ul><li>LaTeX File: <epc:pin name="l_url" /></li><li>Preview: <epc:pin name="p_url" /></li></ul></div></epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/View:no_preview">No preview available</epp:phrase>
 
+<epp:phrase id="Plugin/Screen/Coversheet/Listing:remove_column_confirm" ref="Plugin/Screen/Review:remove_column_confirm" />
 
-<epp:phrase id='current_file'>Current File: </epp:phrase>
-<epp:phrase id='upload_file'>Upload New File: </epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Destroy:title">Destroy</epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Destroy:sure_delete"><p>Are you sure you want to destroy <em><epc:pin name="title"/></em>? This action cannot be undone.</p></epp:phrase>
+<epp:phrase id="Plugin/Screen/Coversheet/Destroy:item_removed" ref="Plugin/Screen/EPrint/Remove:item_removed" />
+
+<epp:phrase id="Plugin/Screen/Coversheet/Details:title" ref="Plugin/Screen/EPrint/Details:title" />
+<epp:phrase id="Plugin/Screen/Coversheet/Details:other" ref="Plugin/Screen/EPrint/Details:other" />
+<epp:phrase id="Plugin/Screen/Coversheet/Commit:save" ref="lib/submissionform:action_staff_save" />
+
+<epp:phrase id="lib/searchfield:help_counter">The ID of the Item</epp:phrase>
+<epp:phrase id="lib/searchfield:help_file">The file to search for</epp:phrase>
+<epp:phrase id="lib/searchfield:help_search">The criteria to search for</epp:phrase>
+
+<epp:phrase id="Plugin/Screen/EPrint/Staff/ApplyCoversheet:action:cover:title">Apply Coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/EPrint/Staff/ApplyCoversheet:action:cover:description">Find and apply a Coversheet</epp:phrase>
+<epp:phrase id="Plugin/Screen/EPrint/Staff/ApplyCoversheet:no_plugin">Could not load Convert::AddCoversheet plugin</epp:phrase>
+<epp:phrase id="Plugin/Screen/EPrint/Staff/ApplyCoversheet:covered">Coversheet has been applied</epp:phrase>
+<epp:phrase id="Plugin/Screen/EPrint/Staff/ApplyCoversheet:not_covered">No Coversheet was been applied</epp:phrase>
 
 </epp:phrases>
