@@ -10,7 +10,7 @@ EPrints::Plugin::Convert::AddCoversheet - Prepend front coversheet sheets
 
 use strict;
 use warnings;
-use encoding 'utf-8';
+#use encoding 'utf-8';
 
 use File::Copy;
 use Cwd;

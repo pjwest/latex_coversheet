@@ -7,6 +7,8 @@ $c->{coversheet}->{tags} = {
 
 		'type' 		=>  sub { my ($eprint) = @_; return EPrints::Utils::tree_to_utf8($eprint->render_value('type')); },
 
+		'abstract' 	=>  sub { my ($eprint) = @_; return EPrints::Utils::tree_to_utf8($eprint->render_value('abstract')); },
+
 		'url' 		=>  sub { my ($eprint) = @_; return $eprint->get_url; },
 
 		'date'		=> sub {

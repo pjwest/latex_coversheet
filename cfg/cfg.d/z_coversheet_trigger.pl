@@ -5,6 +5,27 @@
 # flag to say whether a watermark is required
 $c->{add_coversheet} = 1;
 
+$c->add_dataset_trigger( "eprint", EP_TRIGGER_STATUS_CHANGE, sub
+{
+	my( %args ) = @_;
+	my( $eprint, $old_state, $new_state ) = @args{qw( dataobj old_status new_status )};
+
+	return EP_TRIGGER_OK unless defined $eprint;
+	return EP_TRIGGER_OK unless defined $new_state && $new_state eq "archive";
+	my $repo = $eprint->repository;
+	return EP_TRIGGER_OK unless $repo->config( "add_coversheet" );
+       	my $plugin = $repo->plugin( "Convert::AddCoversheet" );
+	unless( defined $plugin )
+       	{
+               	$repo->log( "[AddCoversheet] Could not load Convert::AddCoversheet plugin\n" );
+		return EP_TRIGGER_OK;
+       	}
+
+	$repo->call( "cover_eprint_docs" , $repo, $eprint, $plugin );
+
+	return EP_TRIGGER_OK;
+}, priority => 100 );
+
 $c->add_trigger( EP_TRIGGER_DOC_URL_REWRITE, sub
 {
 	my( %args ) = @_;
@@ -48,6 +69,7 @@ print STDERR "EP_TRIGGER_DOC_URL_REWRITE\n";
 
 	$repo->log( "[AddCoversheet] correct type of relation\n" ) if $debug;
 
+	
 	# search for a coversheet that can be applied to this document
 	my $coversheet = EPrints::DataObj::Coversheet->search_by_eprint( $repo, $eprint );
 	$repo->log( "[AddCoversheet] no coversheet found for item \n" ) if $debug && ! $coversheet;
@@ -69,7 +91,8 @@ print STDERR "EP_TRIGGER_DOC_URL_REWRITE\n";
 	}
 
 	$repo->log( "[AddCoversheet] need to regenerate the cover [".$regenerate."]\n" ) if $debug;
-	if( $regenerate || $debug )
+	#if( $regenerate || $debug )
+	if( $regenerate )
 	{
 
         	if( defined $coverdoc )

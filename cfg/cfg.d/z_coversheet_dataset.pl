@@ -471,7 +471,7 @@ sub valid_file
 }
 
 #based on EPrints->in_edorial_scope_of
-sub applies_to_eprint_DEPR
+sub applies_to_eprint
 {
 	my( $self, $eprint ) = @_;
 
@@ -484,7 +484,8 @@ sub applies_to_eprint_DEPR
 }
 
 # Checks that this CS applies to $eprint (tests done in-memory). The original code (above) was testing via database lookup.
-sub applies_to_eprint
+# but it works better with subject trees
+sub applies_to_eprint_DEPR
 {
 	my( $self, $eprint ) = @_;
 	
