@@ -12,6 +12,7 @@ $c->{plugins}{"Screen::Coversheet::New"}{params}{disable} = 0;
 $c->{plugins}{"Screen::Coversheet::Destroy"}{params}{disable} = 0;
 $c->{plugins}{"Screen::EPMC::Coversheet"}{params}{disable} = 0;
 $c->{plugins}{"Screen::Admin::ReApplyCoversheet"}{params}{disable} = 0;
+$c->{plugins}{"Screen::Admin::ManageCoversheets"}{params}{disable} = 0;
 
 
 $c->{executables}->{pdflatex} = "/usr/bin/pdflatex";

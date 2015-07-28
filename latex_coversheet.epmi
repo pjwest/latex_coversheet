@@ -36,9 +36,9 @@
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>54a23b3596f95e2259b822a96c8912a8</hash>
+          <hash>fd07eb07d39171498985922b0ddff026</hash>
           <hash_type>MD5</hash_type>
-          <filesize>5929</filesize>
+          <filesize>6001</filesize>
         </file>
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet_dataset.pl</filename>
