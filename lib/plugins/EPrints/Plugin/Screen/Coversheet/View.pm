@@ -134,7 +134,8 @@ sub render_links
         		my $frontfile_path = $temp_dir . '/frontfile.pdf'; 
         		if ( ! -e $frontfile_path )
         		{
-				$repo->log( "[Convert::AddCoversheet] Unexpected absence of coversheet pdf file." );
+				EPrints::DataObj::Coversheet->log( $repo, 
+					"[Convert::AddCoversheet] Unexpected absence of coversheet pdf file." );
 			}       
 			else
 			{
@@ -145,7 +146,7 @@ sub render_links
 		}
 		else
 		{
-			$repo->log("[Convert::AddCoversheet] Cannot call prepare_latex_pdf\n");
+			EPrints::DataObj::Coversheet->log( $repo, "[Convert::AddCoversheet] Cannot call prepare_latex_pdf\n");
 		}
 
 		if ( -e $preview_path )

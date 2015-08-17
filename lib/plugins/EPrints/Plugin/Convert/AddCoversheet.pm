@@ -10,7 +10,6 @@ EPrints::Plugin::Convert::AddCoversheet - Prepend front coversheet sheets
 
 use strict;
 use warnings;
-#use encoding 'utf-8';
 
 use File::Copy;
 use Cwd;
@@ -62,6 +61,20 @@ sub can_convert
 	return %types;
 }
 
+
+######################################################################
+=pod
+
+=item prepare_pages( $self, $doc, $pages )
+
+tests the coversheet pages obtained from the coversheet Dataobj and if
+they are LaTeX files the y are converted to pdf files.
+The process of converting to a pdf file also inserts the data for any tags
+contained in the coversheet pages.
+
+=cut
+######################################################################
+
 sub prepare_pages
 {
 	my ($self, $doc, $pages) = @_;
@@ -70,7 +83,7 @@ sub prepare_pages
 	my $temp_dir = File::Temp->newdir( "ep-coversheetXXXX", TMPDIR => 1 );
 	if( !defined $temp_dir )
 	{
-		$repo->log( "[Convert::AddCoversheet] Failed to create dir $temp_dir" ) if $self->{_debug};
+		EPrints::DataObj::Coversheet->log( $repo, "[Convert::AddCoversheet] Failed to create dir $temp_dir" ) if $self->{_debug};
 		return;
 	}
 
@@ -90,7 +103,7 @@ sub prepare_pages
 			}
 			else
 			{
-				$repo->log("[Convert::AddCoversheet] Cannot call prepare_latex_pdf\n");
+				EPrints::DataObj::Coversheet->log( $repo, "[Convert::AddCoversheet] Cannot call prepare_latex_pdf\n");
 			}
 
 		}
@@ -100,26 +113,38 @@ sub prepare_pages
 		}
 		else
 		{
-			$repo->log("[Convert::AddCoversheet] Cannot handle coversheet of format '$filetype'\n");
+			EPrints::DataObj::Coversheet->log( $repo, "[Convert::AddCoversheet] Cannot handle coversheet of format '$filetype'\n");
 		}
 	}
 
 	return $temp_dir;
 }
 
+
+######################################################################
+=pod
+
+=item export( $plugin, $target_dir, $doc, $type )
+
+This is called as part of the convert process.
+It calls prepare_pages to obtain a pdf file to use as a front cover.
+The tool pdftk or gs is then used to stitch the pdf front cover to
+the doc supplied.
+The resulting pdf documnet is stored in the $target_dir
+
+=cut
+######################################################################
+
 sub export
 {
 	my ( $plugin, $target_dir, $doc, $type) = @_;
 
 	my $repo = $plugin->get_repository;
-	$repo->log( "[Convert::AddCoversheet] export start\n" ) if $plugin->{_debug};
+	EPrints::DataObj::Coversheet->log( $repo, "[Convert::AddCoversheet] export start\n" ) if $plugin->{_debug};
 	my $pages = $plugin->{_pages};
 	return unless( defined $pages );
 	
 	return unless $repo->can_execute( "pdflatex" );
-	return unless $repo->can_execute( "pdftk" );
-
-	my $pdftk = $repo->get_conf( "executables", "pdftk" );
 
 	my $temp_dir = $plugin->prepare_pages($doc, $pages);
 	return unless $temp_dir;
@@ -127,7 +152,7 @@ sub export
 	my $frontfile_path = $temp_dir . '/frontfile.pdf';
 	if ( ! -e $frontfile_path )
 	{
-                $repo->log( "[Convert::AddCoversheet] Unexpected absence of coversheet files." );
+                EPrints::DataObj::Coversheet->log( $repo, "[Convert::AddCoversheet] Unexpected absence of coversheet files." );
                 return;
         }
 
@@ -148,9 +173,25 @@ sub export
 
 	my $temp_output_file = $temp_dir.'/temp.pdf';
 
-print STDERR "calling pdftk [$frontfile_path] [$doc_path] [$temp_output_file]\n";
+	my $sys_call_status;
 	# prepend cover page
-	my $sys_call_status = system( $pdftk, $frontfile_path, $doc_path, "cat", "output", $temp_output_file );
+	if ( "pdftk" eq $repo->get_conf( "coversheet", "stitch_tool" ) )
+	{
+		my $pdftk = $repo->get_conf( "executables", "pdftk" );
+		$sys_call_status = system( $pdftk, $frontfile_path, $doc_path, "cat", "output", $temp_output_file );
+	}
+	else
+	{
+		# prepend using GhostScript
+		my $gs = $repo->get_conf( "executables", "gs" );
+		my $gs_cmd = $repo->get_conf( "gs_pdf_stich_cmd" );
+		# add the output file
+		$gs_cmd .= $temp_output_file;
+		# add the input files
+		$gs_cmd .= " '$frontfile_path'" if $frontfile_path;
+		$gs_cmd .= " '$doc_path'";
+		$sys_call_status = system($gs_cmd);
+	}
 
 	# check it worked
 	if (0 == $sys_call_status)
@@ -159,7 +200,11 @@ print STDERR "calling pdftk [$frontfile_path] [$doc_path] [$temp_output_file]\n"
 	}
 	else
         {
-                $repo->log("[Convert::AddCoversheet] pdftk could not create '$output_file'. Check the PDF is not password-protected. Call returned [".$sys_call_status."]\n");
+                EPrints::DataObj::Coversheet->log( $repo, 
+			"[Convert::AddCoversheet] ".
+			$repo->get_conf( "coversheet", "stitch_tool" ).
+			" could not create '$output_file'. ".
+			"Check the PDF is not password-protected. Call returned [".$sys_call_status."]\n");
                 return;
         }
 

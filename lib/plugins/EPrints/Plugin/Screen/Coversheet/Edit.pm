@@ -257,14 +257,14 @@ sub render_buttons
 
 	if( defined $self->workflow->get_prev_stage_id || defined $self->workflow->get_next_stage_id )
 	{
-		print STDERR "Multistage coversheet workflows are unsupported\n";
+		EPrints::DataObj::Coversheet->log( $self->{repository}, "Multistage coversheet workflows are unsupported\n" );
 	}
 
 	push @{$buttons{_order}}, "update", "exit" ;
 	$buttons{'exit'} = $self->phrase( "exit" );
 	$buttons{update} = $self->phrase( "update" );
 
-	return $self->{session}->render_action_buttons( %buttons );
+	return $self->{repository}->render_action_buttons( %buttons );
 }
 
 1;

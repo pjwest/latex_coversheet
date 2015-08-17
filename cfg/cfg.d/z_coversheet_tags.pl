@@ -3,11 +3,11 @@
 # when using potential utf-8 strings, use the encode() method on the string:
 $c->{coversheet}->{tags} = {
 
-		'title' 	=>  sub { my ($eprint) = @_; return  EPrints::Utils::tree_to_utf8($eprint->render_value('title')) ; },
+		'title' 	=>  sub { my ($eprint) = @_; return Encode::encode( "UTF-8", EPrints::Utils::tree_to_utf8($eprint->render_value('title')) ); },
 
-		'type' 		=>  sub { my ($eprint) = @_; return EPrints::Utils::tree_to_utf8($eprint->render_value('type')); },
+		'type' 		=>  sub { my ($eprint) = @_; return Encode::encode( "UTF-8", EPrints::Utils::tree_to_utf8($eprint->render_value('type'))); },
 
-		'abstract' 	=>  sub { my ($eprint) = @_; return EPrints::Utils::tree_to_utf8($eprint->render_value('abstract')); },
+		'abstract' 	=>  sub { my ($eprint) = @_; return Encode::encode( "UTF-8", EPrints::Utils::tree_to_utf8($eprint->render_value('abstract'))); },
 
 		'url' 		=>  sub { my ($eprint) = @_; return $eprint->get_url; },
 
@@ -26,7 +26,7 @@ $c->{coversheet}->{tags} = {
 		'citation'      =>  sub { 
 			my ($eprint) = @_; 
 			my $cit_str = EPrints::Utils::tree_to_utf8($eprint->render_citation,undef,undef,undef,1 );
-			return $cit_str; 
+			return Encode::encode( "UTF-8",$cit_str ); 
 		},
 
 		'creators'      =>  sub { 
@@ -34,12 +34,12 @@ $c->{coversheet}->{tags} = {
 			my $field = $eprint->dataset->field("creators_name");
 			if ($eprint->is_set( "creators_name" ) ) 
 			{
-				return  EPrints::Utils::tree_to_utf8($field->render_value($eprint->repository, $eprint->get_value("creators_name"), 0, 1) ); 
+				return  Encode::encode( "UTF-8", EPrints::Utils::tree_to_utf8($field->render_value($eprint->repository, $eprint->get_value("creators_name"), 0, 1) ) ); 
 			}
                         elsif ($eprint->is_set( "editors_name" ) )
                         {
                                  $field = $eprint->dataset->field("editors_name");
-                                 return "Edited by: " . EPrints::Utils::tree_to_utf8($field->render_value($eprint->repository,$eprint->get_value("editors_name"), 0, 1) );
+                                 return "Edited by: " . Encode::encode( "UTF-8", EPrints::Utils::tree_to_utf8($field->render_value($eprint->repository,$eprint->get_value("editors_name"), 0, 1) ) );
                         }
 			else
 			{

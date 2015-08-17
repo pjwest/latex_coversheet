@@ -1,0 +1,68 @@
+% Preamble
+% ---
+\documentclass{article}
+
+
+% Packages
+% ---
+\usepackage{amsmath} % Advanced math typesetting
+\usepackage[utf8]{inputenc} % Unicode support (Umlauts etc.)
+\usepackage[ngerman]{babel} % Change hyphenation rules
+\usepackage{hyperref} % Add a link to your document
+\usepackage{graphicx} % Add pictures to your document
+\usepackage{listings} % Source code formatting and highlighting
+
+\graphicspath{ {/opt/eprints3/archives/zora/cfg/static/images/} }
+
+
+\author{mememe}
+\title{my latex coversheet 2}
+
+\begin{document}
+
+\begin{figure}[t!]
+\includegraphics[width=50mm]{uzh_logo_en.jpg}
+%\caption{This figure shows the logo of my website.}
+\end{figure}
+
+\begin{center}
+\large{ \#\#title\#\# } 
+
+Type: \#\#type\#\#
+
+URL: \#\#url\#\#
+
+Date: \#\#date\#\#
+
+citation: \#\#citation\#\#
+
+Creators: \#\#creators\#\#
+
+DOI: \#\#doi_url\#\#
+
+\end{center}
+
+hello!
+
+\begin{align}
+f(x) &= x^2\\
+f'(x) &= 2x\\
+F(x) &= \int f(x)dx\\
+F(x) &= \frac{1}{3}x^3
+\end{align}
+
+
+\small{Hello World!}
+
+Structuring a document is easy!
+
+\begin{center}
+Not a defined tag: \#\#contributors\#\#
+\end{center}
+
+\begin{flushright}
+\#\#date\#\#
+\end{flushright}
+
+
+\end{document}

@@ -1,3 +1,22 @@
+######################################################################
+=pod
+
+=head1 z_coversheet.pl 
+
+This file contains the main configuration for the Latex coversheet
+package. 
+Of particular importance this config file adds the coversheetid field 
+to the document dataset to record the id of the coversheet used for
+that document. It also adds the appropriate roles to control who
+can modify the coversheet configuration.
+
+This file also contains the utility routines 
+prepare_latex_pdf and
+cover_eprint_docs
+
+=cut
+######################################################################
+
 
 # Bazaar Configuration
 
@@ -17,7 +36,11 @@ $c->{plugins}{"Screen::Admin::ManageCoversheets"}{params}{disable} = 0;
 
 $c->{executables}->{pdflatex} = "/usr/bin/pdflatex";
 $c->{executables}->{pdftk} = "/usr/bin/pdftk";
+$c->{gs_pdf_stich_cmd} = "gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=";
+#$c->{coversheet}->{stitch_tool} = "gs";   # "pdftk" or "gs"
+$c->{coversheet}->{stitch_tool} = "pdftk";   # "pdftk" or "gs"
 
+$c->{coversheet_log} = $c->{"var_path"}."/coversheet.log";
 $c->{coversheet}->{preview_item} = 2;
 
 # Stores the id of the Coversheet Dataobj that was used to generated the CS'ed document
@@ -51,6 +74,24 @@ push @{$c->{user_roles}->{admin}}, 'coversheet-editor';
 push @{$c->{user_roles}->{local_admin}}, 'coversheet-editor';
 
 
+######################################################################
+=pod
+
+=item prepare_latex_pdf( $repo, $coversheet_page, $file_path, $eprint, $doc, $temp_dir, $debug )
+
+Reads the LaTeX file specfied in $file_path and applies the tag data
+with data from the $eprint and the $doc.
+The modified LaTeX code is written to a .tex file which is then converted
+to a PDF file using pdflatex.
+The pdf file is saved in the dir $temp_dir with the file name $coversheet_page
+and file extension ".pdf"
+
+If the debug flag is true then additional information is output to the
+coversheet log file.
+
+=cut
+######################################################################
+
 $c->{prepare_latex_pdf} = sub 
 {
 	my ( $repo, $coversheet_page, $file_path, $eprint, $doc, $temp_dir, $debug ) = @_;
@@ -60,24 +101,25 @@ $c->{prepare_latex_pdf} = sub
 	open LTXFILE, $file_path || die ( "unable to open latex coversheet page $file_path" );
 	while (<LTXFILE>) { $content .= $_; }
 	close LTXFILE;
-	$repo->log( "[prepare_latex_pdf] Got latex content [$content]" ) if $debug;
+	EPrints::DataObj::Coversheet->log( $repo, "[prepare_latex_pdf] Got latex content [$content]" ) if $debug;
 
 	return unless defined $content;
 
 	my $tags = $repo->config( 'coversheet', 'tags' );
 	foreach my $tag (keys %{$tags})
 	{
-		$repo->log( "[prepare_latex_pdf] Attempt to replace [$tag] with [".&{$tags->{$tag}}( $eprint, $doc )."]" ) if $debug; 
+		EPrints::DataObj::Coversheet->log( $repo, 
+			"[prepare_latex_pdf] Attempt to replace [$tag] with [".&{$tags->{$tag}}( $eprint, $doc )."]" ) if $debug; 
 		my $value = &{$tags->{$tag}}( $eprint, $doc );
 		$content =~ s/\\#\\#$tag\\#\\#/$value/g;
 	}
 
-	$repo->log( "[prepare_latex_pdf] Updated latex content [$content]" ) if $debug;
+	EPrints::DataObj::Coversheet->log( $repo, "[prepare_latex_pdf] Updated latex content [$content]" ) if $debug;
 	# write coverpage content to cover.tex
 	my $latex_file = $temp_dir."/".$coversheet_page.".tex";
 	if( !open( LATEX, '+>'.$latex_file ))
 	{
-		$repo->log( "[prepare_latex_pdf] Failed to create file $latex_file" );
+		EPrints::DataObj::Coversheet->log( $repo, "[prepare_latex_pdf] Failed to create file $latex_file" );
 		return;
 	}
 	print LATEX $content;
@@ -90,12 +132,12 @@ $c->{prepare_latex_pdf} = sub
 	my $pdf_file = $temp_dir."/".$coversheet_page.".pdf";
 	unless( -e $pdf_file )
 	{
-		$repo->log( "[prepare_latex_pdf] Could not generate $pdf_file. Check that coverpage content is valid LaTeX." );
+		EPrints::DataObj::Coversheet->log( $repo, "[prepare_latex_pdf] Could not generate $pdf_file. Check that coverpage content is valid LaTeX." );
 		my $str;
 		open LFILE, $temp_dir."/".$coversheet_page.".log" || die( "unable to open pdflatex log file to report errors");
 		while (<LFILE>) { $str .= $_; } 
 		close LFILE;
-		print STDERR "\n\npdflatex Log: $str\n\n";
+		EPrints::DataObj::Coversheet->log( $repo, "\n\npdflatex Log: $str\n\n");
 		return;
 	}
 
@@ -103,6 +145,19 @@ $c->{prepare_latex_pdf} = sub
 	return;
 };
 
+######################################################################
+=pod
+
+=item cover_eprint_docs( $repo, $eprint, $plugin )
+
+Tests each document owned by the EPrint item and if appropriate uses the
+specified plugin to apply a coversheet to the document.
+
+The document field coversheetid is updated with the id of the coversheet
+used
+
+=cut
+######################################################################
 
 $c->{cover_eprint_docs} = sub 
 {
@@ -130,6 +185,7 @@ $c->{cover_eprint_docs} = sub
 		my $coverdoc = EPrints::DataObj::Coversheet->get_coversheet_doc( $doc );
         	if( defined $coverdoc )
         	{
+			my $current_cs_id = $doc->get_value( 'coversheetid' ) || -1; # coversheet used to cover document
 			# remove existing covered version
                 	$doc->get_eprint->set_under_construction( 1 );
                 	$doc->remove_object_relations( $coverdoc ); # may not be required?
@@ -137,6 +193,10 @@ $c->{cover_eprint_docs} = sub
 			$doc->set_value( 'coversheetid', undef );
 			$doc->commit();
                 	$doc->get_eprint->set_under_construction( 0 );
+
+			EPrints::DataObj::Coversheet->log( $repo, 
+			"[AddCoversheet] Removed coversheet time[".EPrints::Time::get_iso_timestamp()."] ".
+			"EPrint [".$eprint->get_id."] Document [".$doc->get_id."] Cover [".$current_cs_id."] \n" );
         	}
 
 		my $coversheet = EPrints::DataObj::Coversheet->search_by_eprint( $repo, $eprint );
@@ -144,12 +204,12 @@ $c->{cover_eprint_docs} = sub
 
 		# generate new covered version
 		my $pages = $coversheet->get_pages;
-                $repo->log( "[AddCoversheet] no coversheet pages defined [".$pages."]\n" ) unless $pages;
+                EPrints::DataObj::Coversheet->log( $repo, "[AddCoversheet] no coversheet pages defined [".$pages."]\n" ) unless $pages;
                	next unless $pages;
 		$plugin->{_pages} = $pages;
  	
 		my $newcoverdoc = $plugin->convert( $eprint, $doc, "application/pdf" );
-               	$repo->log( "[AddCoversheet] Could not create coversheet document\n" ) unless $newcoverdoc;
+               	EPrints::DataObj::Coversheet->log( $repo, "[AddCoversheet] Could not create coversheet document\n" ) unless $newcoverdoc;
 		next unless $newcoverdoc;
 
 		# add relation to new covered version
@@ -166,6 +226,9 @@ $c->{cover_eprint_docs} = sub
 	
 		$eprint->set_under_construction( 0 );
 		$covered++;
+               	EPrints::DataObj::Coversheet->log( $repo, 
+			"[AddCoversheet] Applied coversheet time[".EPrints::Time::get_iso_timestamp()."] ".
+			"EPrint [".$eprint->get_id."] Document [".$doc->get_id."] Cover [".$coversheet->get_id."] \n" );
 	}
 
 	return $covered;

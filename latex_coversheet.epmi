@@ -36,30 +36,30 @@
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>fd07eb07d39171498985922b0ddff026</hash>
+          <hash>154b15bc3dfb17af4eba389325d53db9</hash>
           <hash_type>MD5</hash_type>
-          <filesize>6001</filesize>
+          <filesize>8755</filesize>
         </file>
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet_dataset.pl</filename>
-          <mime_type>text/x-c++</mime_type>
-          <hash>8061b119c378b9a12cc8292e8617acff</hash>
+          <mime_type>text/plain</mime_type>
+          <hash>9947dbb4b09b4436ed1becb7c659a11c</hash>
           <hash_type>MD5</hash_type>
-          <filesize>15965</filesize>
+          <filesize>13568</filesize>
         </file>
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet_tags.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>1a489442c28e51d2bfe0a67f42b412ef</hash>
+          <hash>3699b2d498cc6d681d80bf582a37d089</hash>
           <hash_type>MD5</hash_type>
-          <filesize>2072</filesize>
+          <filesize>2229</filesize>
         </file>
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet_trigger.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>6b48bd8f3f91c6df10d5dd1a3589a3f7</hash>
+          <hash>4a6c6831a88d18138a67bf2024c370a7</hash>
           <hash_type>MD5</hash_type>
-          <filesize>5522</filesize>
+          <filesize>6913</filesize>
         </file>
         <file>
           <filename>lang/en/phrases/latex_coversheet.xml</filename>
@@ -71,9 +71,9 @@
         <file>
           <filename>plugins/EPrints/Plugin/Convert/AddCoversheet.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>543c8a90c3fe511c1c847c3a15e55a37</hash>
+          <hash>0dc78601c823a0c8a3ded72fec2a1fc8</hash>
           <hash_type>MD5</hash_type>
-          <filesize>3954</filesize>
+          <filesize>5390</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Admin/ManageCoversheets.pm</filename>
@@ -113,9 +113,9 @@
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/Edit.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>1432d249322360b785fd5fbfec3001f2</hash>
+          <hash>122e06353508b7f83510a6aba6b71e1e</hash>
           <hash_type>MD5</hash_type>
-          <filesize>5225</filesize>
+          <filesize>5273</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/Listing.pm</filename>
@@ -127,23 +127,23 @@
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/New.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>47a8f4d07061ee0224dcdea62171afc5</hash>
+          <hash>72788f6afd091b60a777d2e8061e2c64</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1320</filesize>
+          <filesize>1337</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/Coversheet/View.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>930a04740daf0e769052e57209d8c8fe</hash>
+          <hash>bfe3d6628af1154a5657e54d78509e8b</hash>
           <hash_type>MD5</hash_type>
-          <filesize>4107</filesize>
+          <filesize>4174</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/EPMC/LatexCoversheet.pm</filename>
           <mime_type>inode/symlink</mime_type>
-          <hash>0fa243a94ec7662f257b4a6057d4c7b7</hash>
+          <hash>d230592e303bc083bfe16ad06d9b42e7</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1438</filesize>
+          <filesize>1178</filesize>
         </file>
         <file>
           <filename>plugins/EPrints/Plugin/Screen/EPrint/Staff/ApplyCoversheet.pm</filename>
@@ -151,6 +151,13 @@
           <hash>26325530dd958c43b0896c228a8a3ab4</hash>
           <hash_type>MD5</hash_type>
           <filesize>1558</filesize>
+        </file>
+        <file>
+          <filename>static/style/images/action_deprecate.png</filename>
+          <mime_type>image/png</mime_type>
+          <hash>9570b214efb6949314d2774f09e38e2a</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>1090</filesize>
         </file>
         <file>
           <filename>workflows/coversheet/default.xml</filename>
@@ -179,4 +186,7 @@
   </creators>
   <title>LaTeX Coversheets</title>
   <description>A version of the Coversheets Plugin modified for the University of Zurich to use LaTeX</description>
+  <requirements>apt-get install texlive-latex-base might work but for me it did not include the required styles
+
+apt-get install texlive-full</requirements>
 </epm>

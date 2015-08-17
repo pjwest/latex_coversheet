@@ -1,3 +1,14 @@
+######################################################################
+=pod
+
+=head1 z_coversheet_dataset.pl 
+
+This file contains the definition of the Coversheet dataset that is used
+to store and manage the coversheet pages.
+
+=cut
+######################################################################
+
 
 # define the Coversheet dataset
 $c->{datasets}->{coversheet} = {
@@ -304,10 +315,8 @@ sub get_pages
 	my $frontfile_path = $self->get_file_path( 'frontfile' );
 	my $frontfile_type = $self->get_page_type( 'frontfile' );
 
-print STDERR "z_coversheet_dataset::get_pages frontfile_path[$frontfile_path] frontfile_type[$frontfile_type]\n";
 	return undef unless( defined  $frontfile_path );
 
-print STDERR "z_coversheet_dataset::get_pages frontfile_path[$frontfile_path] frontfile_type[$frontfile_type]\n";
 	return { 
 		frontfile => {
 			path => $frontfile_path,
@@ -483,134 +492,6 @@ sub applies_to_eprint
 	return 0;
 }
 
-# Checks that this CS applies to $eprint (tests done in-memory). The original code (above) was testing via database lookup.
-# but it works better with subject trees
-sub applies_to_eprint_DEPR
-{
-	my( $self, $eprint ) = @_;
-	
-	return 0 unless $self->is_set('apply_to');
-
-	my $fields = $self->{session}->config( 'license_application_fields' ) || return 0;
-	my $applyto = $self->get_value( 'apply_to' );
-
-	my @conds;
-	foreach my $f (@$fields)
-	{
-
-		my $field = $eprint->dataset->field( $f );
-
-#		0|1||eprint|-|
-#		subjects:subjects:ALL:EQ:10171|type:type:ANY:EQ:article book_section
-		if( $applyto =~ /\|$f:$f:(ANY|ALL):EQ:(.*)$/ )
-		{
-			my $op = $1;
-			my $tail = $2;
-			$tail =~ s/\|.*$//g;
-
-			my @ok_values = split /\s/, $tail;
-			my $real_val = $eprint->get_value( $f );
-			my $rc = &_cmp_values( $self->{session}, $field, $real_val, \@ok_values, $op );		# return 1 if( type1 OR type2 ) ...AND...
-			push @conds, $rc;
-		}
-	}
-
-	return 0 unless(scalar(@conds));
-	
-	for(@conds)
-	{
-		return 0 unless($_);
-	}
-
-	return 1;
-}
-
-sub _cmp_values
-{
-	my( $session, $field, $real_val, $ok_val, $operator ) = @_;
-
-	return 0 unless( defined $real_val );
-
-	my $subj_ds = $session->get_repository->get_dataset( "subject"); 
-	$real_val = [$real_val] unless( ref($real_val) eq 'ARRAY' );
-	my $reqd_vals = ();
-
-	foreach my $val (@$ok_val)
-	{
-		$reqd_vals->{$val}->{reqd} = 1;
-		$reqd_vals->{$val}->{matched} = 0;
-
-		if( $field->isa('EPrints::MetaField::Subject') )
-		{
-			# need to add the children of each ok_val entry to the list of "ok vals"
-			my $new_ok_vals = ();
-			my $subj = $subj_ds->dataobj($val);
-			if (defined $subj)
-			{
-				my @children = $subj->get_children;
-				if (@children)
-				{
-					foreach my $child (@children)
-					{
-						push @$new_ok_vals, $child->get_id;
-					}
-					$reqd_vals->{$val}->{alt} = $new_ok_vals;
-				}
-			}
-		}
-	}
-
-	if( $operator eq 'ANY' )
-	{
-		foreach my $rv ( @$real_val )
-		{
-			foreach my $ov ( keys %$reqd_vals )  
-			{ 
-				return 1 if( "$rv" eq "$ov" ); 
-				#check alternative values
-				foreach my $av ( @{$reqd_vals->{$ov}->{alt}} )
-				{	
-					return 1 if ($rv == $av);
-				}
-			}
-		}
-		return 0;
-	}
-	elsif( $operator eq 'ALL' )
-	{
-		return 0 if scalar @$real_val < scalar @$ok_val;
-		REAL_VALUE: foreach my $rv ( @$real_val )
-		{
-			OK_VALUE: foreach my $ov ( keys %$reqd_vals )  
-			{ 
-				next OK_VALUE if $reqd_vals->{$ov}->{matched};
-				if ($rv == $ov)
-				{
-					$reqd_vals->{$ov}->{matched} = 1; 
-					next REAL_VALUE;
-				}
-				else
-				{
-					#check alternative values
-					foreach my $av ( @{$reqd_vals->{$ov}->{alt}} )
-					{	
-						if ($rv == $av)
-						{
-							$reqd_vals->{$ov}->{matched} = 1;
-							next REAL_VALUE;
-						}
-					}
-				}
-			}
-		}
-		foreach my $ov ( keys %$reqd_vals )
-		{
-			return 0 if 0 == $reqd_vals->{$ov}->{matched};
-		}
-		return 1;
-	}
-	return 0;
-}
 
 sub get_coversheet_doc
 {
@@ -675,6 +556,19 @@ sub needs_regeneration
 		$regenerate = 0 if( ($eprintmod <= $covermod) && ($coversheetmod < $covermod) );
 	}
 	return $regenerate;
+}
+
+sub log
+{
+	my( $class, $repo, $msg ) = @_;
+
+	print STDERR "Unable to log coversheet actions" unless $repo;
+	return unless $repo;
+	my $filename = $repo->config( "coversheet_log" );
+	my $CS_FH;
+	open $CS_FH, '>>', $filename or die "Cannot open coversheet log '$filename': $!\n";
+	$msg = "\n" unless $msg;
+	print $CS_FH "[".localtime()."] ".$msg."\n";
 }
 
 

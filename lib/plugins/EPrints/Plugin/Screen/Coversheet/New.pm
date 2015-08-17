@@ -52,7 +52,7 @@ sub action_create
 	if( !defined $self->{processor}->{dataobj} )
 	{
 		my $db_error = $self->{session}->get_database->error;
-		$self->{processor}->{session}->log( "Database Error: $db_error" );
+		EPrints::DataObj::Coversheet->log( $self->{session}, "Database Error: $db_error" );
 		$self->{processor}->add_message( 
 			"error",
 			$self->html_phrase( "db_error" ) );

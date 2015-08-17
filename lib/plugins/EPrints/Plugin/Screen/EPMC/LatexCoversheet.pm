@@ -54,16 +54,7 @@ sub render_messages
 	my $repo = $self->{repository};
 	my $xml = $repo->xml;
 
-print STDERR "LatexCoversheet::render_messages called\n";
 	my $frag = $xml->create_document_fragment;
-
-#	my $plugin = $repo->plugin( 'OpenOffice' );
-	
-#	unless( defined $plugin )
-#	{
-#		$frag->appendChild( $repo->render_message( 'error', $self->html_phrase( 'error:no_plugin' ) ) );
-#		return $frag;
-#	}
 
 	$frag->appendChild( $repo->render_message( 'message', $self->html_phrase( 'ready' ) ) );
 
