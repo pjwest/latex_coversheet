@@ -1,0 +1,176 @@
+#!/usr/bin/perl -w 
+
+use FindBin;
+#use lib "$FindBin::Bin/../../../perl_lib";
+use lib "/opt/eprints3/perl_lib";
+
+######################################################################
+#
+#
+######################################################################
+
+=pod
+
+=head1 NAME
+
+B<apply_coversheets> - tool to apply coversheets
+
+=head1 SYNOPSIS
+
+B<apply_coversheets> I<command> I<repository_id> [B<options>]
+
+Where I<command> is one of:
+
+=over 4
+
+=item full
+
+=item new_only
+
+=back
+
+=head1 ARGUMENTS
+
+=over 8
+
+=item B<apply_coversheets> all I<repository_id> [I<eprint_id> I<eprint_id> ...]
+
+Attempts to apply a coversheet to all items in the live archive for which there is an appropriate coversheet defined.
+Items that are already covered will be recovered if necessary.
+If a list of eprint_ids is given then just those items are re-covered.
+
+=item B<apply_coversheets> new_only I<repository_id> [I<eprint_id> I<eprint_id> ...]
+
+Attempts to apply a coversheet to all items in the live archive that are not currently covered.
+Items that are already covered will be not be updated.
+If a list of eprint_ids is given then just those items are covered.
+
+=back
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<--help>
+
+Print a brief help message and exit.
+
+=item B<--verbose>
+
+Explain in detail what is going on.
+
+=back   
+
+=cut
+
+
+use strict;
+use EPrints;
+use Getopt::Long;
+use Pod::Usage;
+
+my $verbose = 0;
+my $help = 0;
+
+Getopt::Long::Configure("permute");
+
+GetOptions( 
+	'help|?' => \$help,
+	'verbose' => \$verbose,
+) || pod2usage( 2 );
+pod2usage( 1 ) if $help;
+pod2usage( 2 ) if( scalar @ARGV == 0 ); 
+
+
+if( scalar @ARGV < 2 )
+{
+	print "\nUsage is:";
+	print "\n\t{appl_coversheet} command repository_id {eprintid}\n\n";
+	exit(1);
+}
+
+my $action = shift @ARGV;
+my $repoid = shift @ARGV;
+
+my $ep = EPrints->new();
+my $repo = $ep->repository( $repoid );
+unless ( $repo )
+{
+	print "Unable to load repository $repoid\n";
+	exit(0); 
+}
+
+my $plugin = $repo->plugin( "Convert::AddCoversheet" );
+unless( defined $plugin )
+{
+	print "Could not load Convert::AddCoversheet plugin\n";
+        exit(0);
+}
+
+
+if ( $action eq "full" )
+{
+	apply_covers( $repo, 0, $verbose, $plugin, @ARGV ); 
+}
+elsif ( $action eq "new_only" )
+{
+	apply_covers( $repo, 1, $verbose, $plugin, @ARGV ); 
+}
+else
+{
+	print "Unknown action: $action\n";
+        exit(0);
+}
+
+$repo->terminate;
+exit( 1 );
+
+
+sub apply_covers
+{
+	my ( $repo, $new_only, $verbose, $plugin, @ids ) = @_;
+
+	my $ds = $repo->dataset( "archive" );
+	my $list;
+	if ( @ids )
+	{
+		$list = $ds->list( \@ids );
+	}
+	else
+	{
+		$list = $ds->search;
+	}
+
+	my $info = { covered => 0 };
+
+	$list->map( sub {
+
+		my( $repo, $ds, $eprint, $info ) = @_;
+
+		do {
+			# copy STDOUT to another filehandle so that we can redirect & restore as required
+			open (my $STDOLD, '>&', STDOUT);
+
+			unless ( $verbose )
+			{
+				open (STDOUT, '>>', '/dev/null');	
+			}
+			
+			my $covered = $repo->call( "cover_eprint_docs" , $repo, $eprint, $plugin, $new_only );
+			$info->{covered} += $covered;
+
+			unless ( $verbose )
+			{
+				# restore STDOUT
+				open (STDOUT, '>&', $STDOLD);
+			}
+		};
+
+	}, $info );
+
+	print "\nCovered ".$info->{covered}." item(s)\n" if $verbose;
+	return 1;
+}
+
+
+

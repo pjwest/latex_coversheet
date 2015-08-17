@@ -161,7 +161,7 @@ used
 
 $c->{cover_eprint_docs} = sub 
 {
-	my ( $repo, $eprint, $plugin ) = @_;
+	my ( $repo, $eprint, $plugin, $new_only ) = @_;
 	
 	return 0 unless $eprint;
 	my $covered = 0;
@@ -183,6 +183,8 @@ $c->{cover_eprint_docs} = sub
 
 		# check whether there is an existing covered version and delete it
 		my $coverdoc = EPrints::DataObj::Coversheet->get_coversheet_doc( $doc );
+		next if $new_only && $coverdoc;
+
         	if( defined $coverdoc )
         	{
 			my $current_cs_id = $doc->get_value( 'coversheetid' ) || -1; # coversheet used to cover document
