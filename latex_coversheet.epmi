@@ -27,6 +27,13 @@
           <filesize>1768</filesize>
         </file>
         <file>
+          <filename>epm/latex_coversheet/bin/apply_covertsheets</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>bb029d356f8505e72c52f4d5d9ccc64f</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>3161</filesize>
+        </file>
+        <file>
           <filename>epm/latex_coversheet/bin/remove_coversheets</filename>
           <mime_type>text/plain</mime_type>
           <hash>0677fa05ee49952ae3c4b3972aab8df2</hash>
@@ -36,9 +43,9 @@
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>154b15bc3dfb17af4eba389325d53db9</hash>
+          <hash>8fb20da0f28427529a808283be39c3fd</hash>
           <hash_type>MD5</hash_type>
-          <filesize>8755</filesize>
+          <filesize>8801</filesize>
         </file>
         <file>
           <filename>epm/latex_coversheet/cfg/cfg.d/z_coversheet_dataset.pl</filename>
